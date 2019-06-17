@@ -10,6 +10,7 @@ import multiprocessing
 import baselines.common
 import baselines.common.vec_env.subproc_vec_env
  
+from env import ColabEnv
 from importlib import import_module
 
 class DotDict(dict):
@@ -26,10 +27,10 @@ def set_global_seeds(seed):
     np.random.seed(seed)
     random.seed(seed)
 
-def build_vec_env(env_type=None, env=None, num_env=4, seed=0, **extra_args):
+def build_vec_env(env=None, num_env=4, seed=0, **extra_args):
 
     def make_thunk(i):
-        return lambda: gym.make(env_type, env=env, seed=seed+i, **extra_args)
+        return lambda: ColabEnv(env=env, seed=seed+i, **extra_args)
 
     return baselines.common.vec_env.subproc_vec_env.SubprocVecEnv([make_thunk(i) for i in range(num_env)])
 
@@ -49,8 +50,8 @@ def main(args):
     env.close()
     return score
 
-def random_agent(env_type, env_id, gamestate=None, num_env=4):
-    env = build_vec_env(**{'env_type':env_type, 'env':env_id, 'gamestate':gamestate, 'num_env':num_env})
+def random_agent(env_id, gamestate=None, num_env=4):
+    env = build_vec_env(**{'env':env_id, 'gamestate':gamestate, 'num_env':num_env})
     env.reset()
     for _ in range(100000):
         env.render()

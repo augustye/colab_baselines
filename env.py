@@ -1,9 +1,10 @@
 import gym
 import retro as retro 
+import numpy as np
 
 from baselines.common import atari_wrappers, retro_wrappers
 
-class FightEnv(gym.Wrapper):
+class ColabEnv(gym.Wrapper):
 
     def __init__(self, env='KungFu-Nes', netowrk="cnn", seed=0, frame_skip=4, frame_stack=4, record=False, gamestate=None, **extra_args):
 
