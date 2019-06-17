@@ -21,7 +21,7 @@ params_deepq = {
     'frame_stack': [1],
     'exploration_fraction': [0.72],     
     'exploration_final_eps': [0.1],     
-    'learning_starts': [50000],          
+    'learning_starts': [5], #50000          
     'target_network_update_freq':[8192],  
     'layer_norm': [False],
     'param_noise': [False], 
@@ -31,7 +31,7 @@ params_deepq = {
     'prioritized_replay_alpha': [0.6], 
     'checkpoint_freq': [100000], 
     'checkpoint_path': ['/tmp/deepq'], 
-    'print_freq': [100],
+    'print_freq': [1], #100
     'network': ['mlp'], 
     'load_path': [None],
     'rendering': [True],
