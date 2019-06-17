@@ -52,7 +52,6 @@ def learn(env=None, network="mlp", seed=None, lr=5e-4, total_timesteps=100000, b
                 episode_rewards.append(0)
 
             if done and len(episode_rewards) % print_freq == 0:
-                env.render()
                 saved_mean_reward = print_and_save_model(start_time, t, learning_starts, episode_rewards, saved_mean_reward, exploration, replay_buffer, beta_schedule, checkpoint_path)
                 
         if t >= learning_starts and t % train_freq == 0:
