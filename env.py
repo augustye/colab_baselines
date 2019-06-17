@@ -8,8 +8,10 @@ class ColabEnv(gym.Wrapper):
 
     def __init__(self, env='KungFu-Nes', netowrk="cnn", seed=0, frame_skip=4, frame_stack=4, record=False, gamestate=None, **extra_args):
 
-        if env == 'KungFuMaster-Atari2600':   # 18 actions --> 14 actions
-            env = retro.make(env, use_restricted_actions=retro.Actions.DISCRETE)
+        game_name = env
+        env = retro.make(env, use_restricted_actions=retro.Actions.DISCRETE, state=gamestate, record=record)
+        
+        if game_name == 'KungFuMaster-Atari2600':   # 18 actions --> 14 actions
 
             # 1.Atari有Sprite闪烁问题，需要用max pooling保证不丢失角色 --> 实际测试不用max pooling训练无法收敛
             # 2.此游戏frame skip不能是偶数，否则近身攻击会无效 -->  类似例子: Space Invaders using k = 4 makes the lasers invisible (Mnih.2013)
@@ -22,22 +24,20 @@ class ColabEnv(gym.Wrapper):
             env.unwrapped.button_combos = [[0, 16, 128, 64, 32, 160, 96, 129, 65, 33, 145, 81, 161, 97]] 
             env.unwrapped.action_space = env.action_space = gym.spaces.Discrete(14)
 
-        elif env == 'KungFu-Nes':              # 36 actions
-            env = retro.make(env, use_restricted_actions=retro.Actions.DISCRETE)
+        elif game_name == 'KungFu-Nes':              # 36 actions
+            
             # NES也有Sprite闪烁问题，需要用max pooling保证不丢失角色
             env = atari_wrappers.MaxAndSkipEnv(env, skip=frame_skip)  
             env = atari_wrappers.WarpFrame(env)
             env = atari_wrappers.FrameStack(env, frame_stack)
 
-        elif env == 'StreetFighterIISpecialChampionEdition-Genesis':
-            env = retro.make(env, use_restricted_actions=retro.Actions.DISCRETE)
+        elif game_name == 'StreetFighterIISpecialChampionEdition-Genesis':
             env = atari_wrappers.MaxAndSkipEnv(env, skip=frame_skip)  #skip 13
             env = atari_wrappers.WarpFrame(env)
             env = atari_wrappers.FrameStack(env, frame_stack)
             env = modify_reward(env) 
 
-        else: #if env == 'SamuraiShodown-Genesis':
-            env = retro.make(env, use_restricted_actions=retro.Actions.DISCRETE)
+        else: #if game_name == 'SamuraiShodown-Genesis':
             env = retro_wrappers.StochasticFrameSkip(env, n=frame_skip, stickprob=0.25)
             env = retro_wrappers.TimeLimit(env, max_episode_steps=27000)
             env = atari_wrappers.WarpFrame(env)
