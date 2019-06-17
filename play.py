@@ -2,7 +2,6 @@
 import os
 import sys
 import params
-import pygame
 
 from train import DotDict, set_global_seeds, build_vec_env, import_module
 
