@@ -7,12 +7,6 @@ import pygame
 from train import DotDict, set_global_seeds, build_vec_env, import_module
 
 def display_init():
-    if os.uname().machine == "aarch64":
-        os.environ["SDL_FBDEV"]    = "/dev/fb1"
-        os.environ["SDL_MOUSEDEV"] = "/dev/tty0"
-    else:
-        os.environ["DISPLAY"] = ":1"
-
     video_size = (480,320)
     screen = pygame.display.set_mode(video_size)
 
@@ -30,11 +24,10 @@ def env_model_init(params):
     set_global_seeds(args.seed)
 
     args.num_env = 1 
-    #args.record =  './_record'
+    args.record =  '/tmp/record'
     args.env = env = build_vec_env(**args)
 
     args.total_timesteps = 10 
-    args.load_path = args.save_path.replace("/tmp/deepq/", "./_model/")
     learn = import_module('.'.join([args.alg, args.alg])).learn
     model,score = learn(**args)
 
@@ -59,5 +52,5 @@ def play(params):
     pygame.quit()
 
 if __name__ == '__main__':
-    play(getattr(params, sys.argv[1]))
+    play(params.deepq_cnn)
 

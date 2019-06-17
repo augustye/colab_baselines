@@ -15,23 +15,23 @@ params_deepq = {
     'save_video_length': [200], 
     'extra_import': [None],
     'seed': [None],
-    'total_timesteps': [1400001],
+    'total_timesteps': [1400],          #1400001
+    'learning_starts': [5],             #50000     
+    'checkpoint_freq': [100],           #100000
+    'print_freq': [1],                  #100
     'num_env': [1],
     'frame_skip': [13],  
     'frame_stack': [1],
     'exploration_fraction': [0.72],     
-    'exploration_final_eps': [0.1],     
-    'learning_starts': [5], #50000          
+    'exploration_final_eps': [0.1],          
     'target_network_update_freq':[8192],  
     'layer_norm': [False],
     'param_noise': [False], 
     'train_freq': [4], 
     'gamma': [0.99], 
-    'buffer_size': [1000000],  
+    'buffer_size': [1000000], 
     'prioritized_replay_alpha': [0.6], 
-    'checkpoint_freq': [100000], 
     'checkpoint_path': ['/tmp/deepq'], 
-    'print_freq': [1], #100
     'network': ['mlp'], 
     'load_path': [None],
     'rendering': [True],
