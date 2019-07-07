@@ -21,6 +21,8 @@ class DotDict(dict):
         self[key] = value
 
 def set_global_seeds(seed):
+    #disable tenforflow logging
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
     os.environ["PYTHONHASHSEED"] = "0" 
     tf.set_random_seed(seed)
