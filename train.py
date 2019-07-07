@@ -14,6 +14,7 @@ from importlib import import_module
 
 #disable tenforflow warnings
 import tensorflow as tf
+import logging
 tf.get_logger().setLevel(logging.ERROR)
 
 class DotDict(dict):
