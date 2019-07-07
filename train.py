@@ -73,8 +73,6 @@ def random_search(params_distributions):
     print("Start Searching...")
   
     def worker_process(rank):
-        if processes > 1:
-            sys.stdout = open("/tmp/train_" + str(rank) + ".log", "a+", buffering=1)
         seed = int(time.time()%1e6)*1000 + rank
         params = {}
         for key,value in params_distributions.items():
@@ -89,11 +87,8 @@ def random_search(params_distributions):
         queue.put((rank, score, params))
 
     def random_search_worker(rank):
-        if processes >1:
-            p = multiprocessing.Process(target=worker_process, args=(rank,))
-            p.start()
-        else:
-            return worker_process(0)
+        p = multiprocessing.Process(target=worker_process, args=(rank,))
+        p.start()
 
     for i in range(processes):
         random_search_worker(i+1)
