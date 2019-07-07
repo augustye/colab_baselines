@@ -3,7 +3,6 @@ import sys
 import gym
 import time
 import params
-import random
 import numpy as np
 import multiprocessing
 import baselines.common
@@ -13,6 +12,7 @@ from env import ColabEnv
 from importlib import import_module
 
 #disable tenforflow warnings
+import tensorflow as tf
 tf.get_logger().setLevel(logging.ERROR)
 
 class DotDict(dict):
