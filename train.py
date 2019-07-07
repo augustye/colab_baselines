@@ -3,6 +3,7 @@ import sys
 import gym
 import time
 import params
+import random
 import numpy as np
 import multiprocessing
 import baselines.common
