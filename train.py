@@ -16,7 +16,6 @@ from importlib import import_module
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import tensorflow as tf
 import logging
-tf.logging.set_verbosity(tf.logging.ERROR)
 logging.getLogger("tensorflow").setLevel(logging.ERROR)
 tf.get_logger().setLevel(logging.ERROR)
 
