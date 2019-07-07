@@ -21,7 +21,7 @@ params_deepq = {
     'learning_starts': [5],             #50000     
     'checkpoint_freq': [100],           #100000
     'print_freq': [1],                  #100
-    'num_env': [1],
+    'num_env': [4],
     'frame_skip': [13],  
     'frame_stack': [1],
     'exploration_fraction': [0.72],     
