@@ -12,10 +12,10 @@ import baselines.common.vec_env.subproc_vec_env
 from env import ColabEnv
 from importlib import import_module
 
-#disable tenforflow warnings
+#disable tenforflow logging
 import tensorflow as tf
 import logging
-tf.get_logger().setLevel(logging.ERROR)
+logging.getLogger("tensorflow").setLevel(logging.ERROR)
 
 class DotDict(dict):
     def __getattr__(self, item):
