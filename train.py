@@ -61,7 +61,7 @@ def random_agent(env_id, gamestate=None, num_env=4):
     env.close()
 
 def random_search(params_distributions):
-    processes = 1
+    processes = 2
     best_score = -1000
     best_params = {}
     queue = multiprocessing.Queue()
