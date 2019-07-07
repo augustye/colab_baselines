@@ -5,13 +5,16 @@ import time
 import params
 import random
 import numpy as np
-import tensorflow as tf
 import multiprocessing
 import baselines.common
 import baselines.common.vec_env.subproc_vec_env
  
 from env import ColabEnv
 from importlib import import_module
+
+#disable tenforflow logging
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+import tensorflow as tf
 
 class DotDict(dict):
     def __getattr__(self, item):
@@ -21,8 +24,6 @@ class DotDict(dict):
         self[key] = value
 
 def set_global_seeds(seed):
-    #disable tenforflow logging
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
     os.environ["PYTHONHASHSEED"] = "0" 
     tf.set_random_seed(seed)
