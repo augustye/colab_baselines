@@ -17,10 +17,10 @@ params_deepq = {
     'save_video_length': [200], 
     'extra_import': [None],
     'seed': [None],
-    'total_timesteps': [1400],          #1400001
-    'learning_starts': [5],             #50000     
-    'checkpoint_freq': [100],           #100000
-    'print_freq': [1],                  #100
+    'total_timesteps': [1400001],   
+    'learning_starts': [50000],        
+    'checkpoint_freq': [100000],    
+    'print_freq': [100],          
     'num_env': [2],
     'frame_skip': [13],  
     'frame_stack': [1],
